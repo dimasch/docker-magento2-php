@@ -16,7 +16,16 @@ if [ "$M2SETUP_USE_ARCHIVE" = true ]; then
     curl -L http://pubfiles.nexcess.net/magento/ce-packages/magento2-$M2SETUP_VERSION.tar.gz | tar xzf - -o -C .
   fi
 else
-  /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=$M2SETUP_VERSION .
+  if [ "$M2SETUP_PROJECT_CUSTOM" = true ]; then
+	echo "Start git clone..."
+	git clone $M2SETUP_PROJECT_URL .
+	echo "Finished clone..."
+	echo "Composer update..."
+	export COMPOSER_PROCESS_TIMEOUT=3000
+	/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer update -vvv
+  else
+	/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=$M2SETUP_VERSION .
+  fi
 fi
 
 chmod +x ./bin/magento
