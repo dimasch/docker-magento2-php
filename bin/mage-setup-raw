@@ -59,3 +59,6 @@ echo "Running Magento 2 setup script..."
   $M2SETUP_USE_SAMPLE_DATA_STRING
 
 echo "The setup script has completed execution."
+
+echo "Set magento deploy mode to $APP_MAGE_MODE..."
+/usr/local/bin/php -d memory_limit=2G ./bin/magento deploy:mode:set $APP_MAGE_MODE
