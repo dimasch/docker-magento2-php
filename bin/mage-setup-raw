@@ -19,9 +19,31 @@ else
   if [ "$M2SETUP_PROJECT_CUSTOM" = true ]; then
 	echo "Start git clone..."
 	git clone $M2SETUP_PROJECT_URL .
-	echo "Finished clone..."
-	echo "Composer update..."
+	
 	export COMPOSER_PROCESS_TIMEOUT=3000
+	
+	/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer require magento/module-bundle-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer require magento/module-theme-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer require magento/module-widget-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-catalog-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-customer-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-cms-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-tax-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-review-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-catalog-rule-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-sales-rule-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-sales-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-grouped-product-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-downloadable-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-msrp-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-configurable-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-product-links-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-wishlist-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-swatches-sample-data:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/sample-data-media:100.0.*
+        /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer magento/module-offline-shipping-sample-data:100.0.*
+        
+	echo "Composer update..."
 	/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer update -vvv
   else
 	/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=$M2SETUP_VERSION .
@@ -36,7 +58,7 @@ if [ "$M2SETUP_USE_SAMPLE_DATA" = true ]; then
     /usr/local/bin/php -d memory_limit=2G ./bin/magento sampledata:deploy
 
     echo "Ignore the above error (bug in Magento), fixing with 'composer update'..."
-    /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer update
+    /usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer update -vvv
   fi
 
   M2SETUP_USE_SAMPLE_DATA_STRING="--use-sample-data"
