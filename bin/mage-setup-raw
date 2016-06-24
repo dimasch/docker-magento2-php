@@ -22,7 +22,7 @@ else
 	
 	export COMPOSER_PROCESS_TIMEOUT=3000
 	
-	if [ ! "$M2SETUP_REMOVE_PACKAGE" ];then
+	if [ "$M2SETUP_REMOVE_PACKAGE" ];then
    		/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer remove --no-update $M2SETUP_REMOVE_PACKAGE
 	fi
 	
