@@ -1,5 +1,5 @@
 FROM php:7.0.7-fpm
-MAINTAINER Mark Shust <mark.shust@mageinferno.com>, Dmitry Schegolihin <d.shegolihin@gmail.com>
+MAINTAINER Dmitry Schegolihin <d.shegolihin@gmail.com>
 
 RUN apt-get update \
   && apt-get install -y \
@@ -27,7 +27,7 @@ RUN docker-php-ext-install \
   zip
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.0.1 \
-    curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash - \
+    && curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash - \
     && apt-get install -y nodejs
 
 ENV PHP_MEMORY_LIMIT 2G
