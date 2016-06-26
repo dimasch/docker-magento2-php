@@ -72,7 +72,6 @@ fi
 
 echo "Running Magento 2 setup script..."
 /usr/local/bin/php -d memory_limit=2G ./bin/magento setup:install \
-  --backend-frontname=admin \
   --db-host=$M2SETUP_DB_HOST \
   --db-name=$M2SETUP_DB_NAME \
   --db-user=$M2SETUP_DB_USER \
@@ -83,7 +82,9 @@ echo "Running Magento 2 setup script..."
   --admin-email=$M2SETUP_ADMIN_EMAIL \
   --admin-user=$M2SETUP_ADMIN_USER \
   --admin-password=$M2SETUP_ADMIN_PASSWORD \
-  --magento-init-params="MAGE_MODE=$APP_MAGE_MODE" \
   $M2SETUP_USE_SAMPLE_DATA_STRING
 
 echo "The setup script has completed execution."
+
+echo "Set magento deploy mode to $APP_MAGE_MODE..."
+/usr/local/bin/php -d memory_limit=2G ./bin/magento deploy:mode:set $APP_MAGE_MODE
