@@ -27,7 +27,7 @@ RUN docker-php-ext-install \
   zip
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.0.1 \
-    && curl --silent --location https://deb.nodesource.com/setup_5.x | sudo bash - \
+    && curl --silent --location https://deb.nodesource.com/setup_5.x | bash - \
     && apt-get install -y nodejs
 
 ENV PHP_MEMORY_LIMIT 2G
