@@ -4,6 +4,7 @@ MAINTAINER Dmitry Schegolihin <d.shegolihin@gmail.com>
 RUN apt-get update \
   && apt-get install -y \
     git \
+    nano \
     npm \
     curl \
     cron \
