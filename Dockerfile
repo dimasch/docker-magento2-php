@@ -1,4 +1,4 @@
-FROM php:7.0.7-fpm
+FROM php:7.0.8-fpm
 MAINTAINER Dmitry Schegolihin <d.shegolihin@gmail.com>
 
 RUN apt-get update \
