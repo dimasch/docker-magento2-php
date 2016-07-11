@@ -31,7 +31,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && curl --silent --location https://deb.nodesource.com/setup_5.x | bash - \
     && apt-get install -y nodejs \
     && pecl install xdebug-beta \
-    && docker-php-ext-enable xdebug \
     && touch /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
