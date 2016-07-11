@@ -29,7 +29,14 @@ RUN docker-php-ext-install \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.0.1 \
     && curl --silent --location https://deb.nodesource.com/setup_5.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install -y nodejs \
+    && pecl install xdebug-beta \
+    && docker-php-ext-enable xdebug \
+    && touch /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini
+
 
 ENV PHP_MEMORY_LIMIT 2G
 ENV PHP_PORT 9000
