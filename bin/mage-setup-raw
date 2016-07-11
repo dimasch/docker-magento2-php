@@ -25,8 +25,9 @@ else
 	if [ "$M2SETUP_REMOVE_PACKAGE" ];then
    		/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer remove --no-update $M2SETUP_REMOVE_PACKAGE
 	fi
-	
-	/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer require --no-update magento/module-bundle-sample-data:100.0.* \
+
+	if [ "$M2SETUP_USE_SAMPLE_DATA" = true ]; then	
+		/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer require --no-update magento/module-bundle-sample-data:100.0.* \
         	magento/module-theme-sample-data:100.0.* \
         	magento/module-widget-sample-data:100.0.* \
         	magento/module-catalog-sample-data:100.0.* \
@@ -46,7 +47,8 @@ else
         	magento/module-swatches-sample-data:100.0.* \
         	magento/sample-data-media:100.0.* \
         	magento/module-offline-shipping-sample-data:100.0.*
-        
+	fi        
+
 	echo "Composer update..."
 	/usr/local/bin/php -d memory_limit=2G /usr/local/bin/composer update -vvv
   else
