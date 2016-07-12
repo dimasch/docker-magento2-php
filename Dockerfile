@@ -13,7 +13,8 @@ RUN apt-get update \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
     libpng12-dev \
-    libxslt1-dev
+    libxslt1-dev \
+    libmagickwand-dev
 
 RUN docker-php-ext-configure \
   gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
@@ -34,7 +35,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && touch /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini
+    && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && yes '' | pecl install -f imagick-beta \
+    && docker-php-ext-enable imagick \
+    && -rf /var/lib/apt/lists/*
 
 
 ENV PHP_MEMORY_LIMIT 2G
