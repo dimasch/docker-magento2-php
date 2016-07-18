@@ -37,8 +37,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && yes '' | pecl install -f imagick-beta \
-    && docker-php-ext-enable imagick \
-    && -rf /var/lib/apt/lists/*
+    && docker-php-ext-enable imagick
 
 
 ENV PHP_MEMORY_LIMIT 2G
