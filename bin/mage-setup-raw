@@ -20,6 +20,11 @@ else
 	echo "Start git clone..."
 	git clone $M2SETUP_PROJECT_URL .
 	
+	if [ "$M2SETUP_CHECKOUT_BRANCH" ]; then
+		echo "Switch to branch: $M2SETUP_CHECKOUT_BRANCH"
+		git checkout $M2SETUP_CHECKOUT_BRANCH
+	fi
+	
 	export COMPOSER_PROCESS_TIMEOUT=3000
 	
 	if [ "$M2SETUP_REMOVE_PACKAGE" ];then
