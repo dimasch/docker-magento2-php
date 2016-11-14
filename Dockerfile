@@ -6,13 +6,15 @@ ENV TERM linux
 RUN apt-get update \
   && apt-get install -y \
     git \
+    curl \      
     cron \
     libfreetype6-dev \
     libicu-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
     libpng12-dev \
-    libxslt1-dev
+    libxslt1-dev \    
+  && apt-get clean
 
 RUN docker-php-ext-configure \
   gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
@@ -28,7 +30,13 @@ RUN docker-php-ext-install \
   zip
 
 RUN curl -sS https://getcomposer.org/installer | \
-  php -- --install-dir=/usr/local/bin --filename=composer
+  php -- --install-dir=/usr/local/bin --filename=composer 
+ 
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - \
+ && apt-get -y install nodejs \
+ && apt-get clean \
+ && npm install -g grunt-cli
+ 
 
 ENV PHP_MEMORY_LIMIT 2G
 ENV PHP_PORT 9000
