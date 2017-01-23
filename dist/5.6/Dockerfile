@@ -31,6 +31,14 @@ RUN docker-php-ext-install \
 
 RUN curl -sS https://getcomposer.org/installer | \
   php -- --install-dir=/usr/local/bin --filename=composer 
+
+RUN pecl install xdebug-beta && \
+    docker-php-ext-enable xdebug && \
+    touch /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.remote_host=192.168.20.107" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+    echo "xdebug.max_nesting_level=500" >> /usr/local/etc/php/conf.d/xdebug.ini
  
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - \
  && apt-get -y install nodejs \
