@@ -6,7 +6,8 @@ ENV TERM linux
 RUN apt-get update \
   && apt-get install -y \
     git \
-    curl \      
+    curl \
+    nano \
     cron \
     libfreetype6-dev \
     libicu-dev \
