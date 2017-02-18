@@ -67,6 +67,3 @@ echo "The setup script has completed execution."
 
 echo "Set magento deploy mode to $APP_MAGE_MODE..."
 /usr/local/bin/php ./bin/magento deploy:mode:set $APP_MAGE_MODE
-
-echo "Setup grunt local packages."
-/usr/bin/npm install --save-dev
