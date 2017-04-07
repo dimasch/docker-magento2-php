@@ -1,7 +1,7 @@
 FROM php:$VERSION-fpm
 MAINTAINER Mark Shust <mark.shust@mageinferno.com>
 
-ENV TERM linux
+ENV TERM xterm
 
 RUN apt-get update \
   && apt-get install -y \
